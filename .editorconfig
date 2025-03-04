@@ -1,0 +1,20 @@
+[*.cs]
+
+# CS8604: Possible null reference argument.
+dotnet_diagnostic.CS8604.severity = silent
+[*.cs]
+
+# CS8604: Possible null reference argument.
+dotnet_diagnostic.CS8604.severity = none
+[*.cs]
+
+# IDE0021: Use block body for constructor
+csharp_style_expression_bodied_constructors = false
+[*.cs]
+
+# IDE0021: Use block body for constructor
+csharp_style_expression_bodied_constructors = true
+[*.cs]
+
+# IDE0021: Use block body for constructor
+csharp_style_expression_bodied_constructors = false
