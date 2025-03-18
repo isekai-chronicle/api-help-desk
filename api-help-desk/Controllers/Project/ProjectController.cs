@@ -1,26 +1,28 @@
+using api_help_desk.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
-namespace api_help_desk.Controllers.Task
+namespace api_help_desk.Controllers.Project
 {
     [Route("api/[controller]")]
-    [Authorize]
     [ApiController]
-    public class TaskController : ControllerBase
+    [Authorize]
+    public class ProjectController : ControllerBase
     {
-        private readonly TaskInterface IMethod;
-        public TaskController(TaskInterface IMethod)
+        private readonly ProjectInterface IMethod;
+        public ProjectController(ProjectInterface IMethod)
         {
             this.IMethod = IMethod;
         }
 
         [HttpGet("Get")]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(string user_id)
         {
             try
             {
-                var list = await IMethod.Get();
+                var list = await IMethod.Get(user_id);
                 return Ok(list);
             }
             catch (Exception ex)
