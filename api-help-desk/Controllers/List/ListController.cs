@@ -1,4 +1,3 @@
-using api_help_desk.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,7 +7,7 @@ namespace api_help_desk.Controllers.List
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ListController : ControllerBase
     {
         private readonly ListInterface IMethod;

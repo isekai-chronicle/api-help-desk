@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace api_help_desk.Interfaces
+namespace api_help_desk.Controllers.List
 {
     public interface ListInterface
     {

@@ -1,16 +1,17 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
-namespace api_help_desk.Controllers.Task
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
+using static api_help_desk.Controllers.Domain.DomainModel;
+
+namespace api_help_desk.Controllers.Domain
 {
     [Route("api/[controller]")]
-    //[Authorize]
     [ApiController]
-    public class TaskController : ControllerBase
+    public class DomainController : ControllerBase
     {
-        private readonly TaskInterface IMethod;
-        public TaskController(TaskInterface IMethod)
+        private readonly DomainInterface IMethod;
+        public DomainController(DomainInterface IMethod)
         {
             this.IMethod = IMethod;
         }
@@ -29,12 +30,27 @@ namespace api_help_desk.Controllers.Task
             }
         }
 
-        [HttpPost("Post")]
-        public async Task<IActionResult> Post()
+        [HttpGet("GetCombo")]
+        public async Task<IActionResult> GetCombo()
         {
             try
             {
-                var list = await IMethod.Post();
+                var list = await IMethod.GetCombo();
+                return Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+
+        [HttpPost("Post")]
+        public async Task<IActionResult> Post(DomainDataIn data)
+        {
+            try
+            {
+                var list = await IMethod.Post(data);
                 return Ok(list);
             }
             catch (Exception ex)
@@ -44,11 +60,11 @@ namespace api_help_desk.Controllers.Task
         }
 
         [HttpPut("Put")]
-        public async Task<IActionResult> Put()
+        public async Task<IActionResult> Put(DomainDataIn data)
         {
             try
             {
-                var list = await IMethod.Put();
+                var list = await IMethod.Put(data);
                 return Ok(list);
             }
             catch (Exception ex)
@@ -58,12 +74,12 @@ namespace api_help_desk.Controllers.Task
         }
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete()
+        public async Task<IActionResult> Delete(DomainDataIdIn data)
         {
             try
             {
-                var list = await IMethod.Delete();
-                return Ok(list);
+                await IMethod.Delete(data);
+                return Ok();
             }
             catch (Exception ex)
             {

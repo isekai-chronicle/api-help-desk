@@ -1,13 +1,11 @@
 using api_help_desk.Context;
-using api_help_desk.Interfaces;
-using api_help_desk.Models;
 using Dapper;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace api_help_desk.Services
+namespace api_help_desk.Controllers.List
 {
     public class ListService : ListInterface
     {
@@ -16,6 +14,12 @@ namespace api_help_desk.Services
         private string _path = Path.Combine(Directory.GetCurrentDirectory(), "Controllers", "List", "Script");
 
         public ListService(DapperContext context) => _context = context;
+
+        public Task<object> Delete()
+        {
+            throw new NotImplementedException();
+        }
+
 
         public async Task<object> Get(string user_id, string project_id)
         {
@@ -52,22 +56,14 @@ namespace api_help_desk.Services
             }
         }
 
-        public async Task<object> Post()
+        public Task<object> Post()
         {
-            // Implement your logic here
-            return await Task.FromResult(new object());
+            throw new NotImplementedException();
         }
 
-        public async Task<object> Put()
+        public Task<object> Put()
         {
-            // Implement your logic here
-            return await Task.FromResult(new object());
-        }
-
-        public async Task<object> Delete()
-        {
-            // Implement your logic here
-            return await Task.FromResult(new object());
+            throw new NotImplementedException();
         }
     }
 }

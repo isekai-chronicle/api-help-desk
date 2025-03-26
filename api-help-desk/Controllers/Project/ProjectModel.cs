@@ -1,4 +1,4 @@
-namespace api_help_desk.Models
+namespace api_help_desk.Controllers.Project
 {
     public class ProjectModel
     {
