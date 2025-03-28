@@ -12,6 +12,7 @@ using api_help_desk.Controllers.Domain;
 using api_help_desk.Controllers.User;
 using api_help_desk.Controllers.Paths;
 using api_help_desk.Controllers.Component;
+using api_help_desk.Controllers.Menu;
 
 
 namespace api_help_desk.Services
@@ -32,6 +33,7 @@ namespace api_help_desk.Services
             services.AddScoped<UserInterface, UserService>();
             services.AddScoped<PathsInterface, PathsService>();
             services.AddScoped<ComponentInterface, ComponentService>();
+            services.AddScoped<MenuInterface, MenuService>();
             return services;
         }
 

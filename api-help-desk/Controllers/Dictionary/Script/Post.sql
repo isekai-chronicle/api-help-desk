@@ -52,6 +52,20 @@ BEGIN
 	SET @component_id = (SELECT TOP 1 id FROM @output_id)
 END
 
+
+INSERT INTO [security].menuData(menu_id, menuData_id_root, component_id, file_id_icon, name, displayName, route, task_id)
+SELECT 	
+	(SELECT TOP 1 M.id FROM [security].menu AS M /*WHERE M.name like 'main%'*/) AS menu_id,
+	null AS menuData_id_root,
+	CC.id AS component_id,
+	null AS file_id_icon,
+	CC.[name],
+	CC.displayName,
+	null AS [route],
+	@task_id
+FROM [frontend].component AS CC
+WHERE CC.id = @component_id
+
 /*eliminar registros que no existen en la lista*/
 /*registros de eventor*/
 DELETE COE
