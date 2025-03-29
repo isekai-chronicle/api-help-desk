@@ -6,7 +6,7 @@ namespace api_help_desk.Controllers.Security.Authentication
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class AuthenticationController : ControllerBase
     {
         private readonly AuthenticationInterface IMethod;

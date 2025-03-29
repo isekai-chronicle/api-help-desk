@@ -68,8 +68,8 @@ namespace api_help_desk.Controllers.Menu
 
         public class MenuDataComboOut
         {
-            public Guid menuData_id { get; set; }
-            public string menuData_name { get; set; }
+            public Guid menuData_id_root { get; set; }
+            public string menuData_name_root { get; set; }
         }
 
         public class MenuDataIn

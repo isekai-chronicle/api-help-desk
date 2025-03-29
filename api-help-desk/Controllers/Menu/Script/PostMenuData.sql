@@ -13,23 +13,23 @@ DECLARE @outputTable TABLE (
     name NVARCHAR(100),    
     displayName NVARCHAR(100),
     menu_id UNIQUEIDENTIFIER,
-    menuData_id_root UNIQUEIDENTIFIER,
-    component_id UNIQUEIDENTIFIER
+    menuData_id_root UNIQUEIDENTIFIER
 );
 
 MERGE INTO [security].menuData AS target
 USING (SELECT @id AS id) AS source
 ON target.id = source.id
 WHEN NOT MATCHED THEN
-    INSERT ([name], displayName, menu_id, menuData_id_root, component_id, task_id)
-    VALUES (@name, @displayName, @menu_id, @menuData_id_root, @component_id, @task_id)
-OUTPUT inserted.id, inserted.name, inserted.displayName, inserted.menu_id, menuData_id_root, component_id INTO @outputTable;
+    INSERT ([name], displayName, menu_id, menuData_id_root, task_id)
+    VALUES (@name, @displayName, @menu_id, @menuData_id_root, @task_id)
+OUTPUT inserted.id, inserted.name, inserted.displayName, inserted.menu_id, inserted.menuData_id_root INTO @outputTable;
 
 /*Devolver el registro actualizado o insertado*/
 SELECT 
-    O.id, 
-    O.name,        
-    O.displayName,    
-    O.menu_id,     
+    O.id AS menuData_id, 
+    O.name AS menuData_name,   
+    O.displayName AS menuData_displayName,
+    O.menuData_id_root,    
+    O.menu_id,   
     @sort AS hashtag
 FROM @outputTable AS O    
