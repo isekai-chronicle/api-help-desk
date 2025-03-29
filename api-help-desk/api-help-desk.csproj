@@ -23,5 +23,48 @@
      <HintPath>..\Authentication\ThroneEncrypt.dll</HintPath>
    </Reference>
  </ItemGroup>
+
+  <ItemGroup>
+  <None Update="Controllers\Area\**/*.sql">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+  <None Update="Controllers\Authentication\**/*.sql">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+ <None Update="Controllers\Component\**/*.sql">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+ <None Update="Controllers\Dictionary\**/*.sql">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+ <None Update="Controllers\Domain\**/*.sql">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+ <None Update="Controllers\Language\**/*.sql">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+ <None Update="Controllers\List\**/*.sql">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+ <None Update="Controllers\Menu\**/*.sql">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+ <None Update="Controllers\Paths\**/*.sql">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+ <None Update="Controllers\Project\**/*.sql">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+ <None Update="Controllers\Role\**/*.sql">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+ <None Update="Controllers\Task\**/*.sql">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+ <None Update="Controllers\User\**/*.sql">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+  
+</ItemGroup>
  
 </Project>
