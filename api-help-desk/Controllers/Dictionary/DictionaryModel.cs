@@ -5,10 +5,11 @@ namespace api_help_desk.Controllers.Dictionary
         public class DictionaryListOut
         {
             public Guid componentObject_id { get; set; }
-            public Guid language_id { get; set; }
+            public Guid? language_id { get; set; }
             public string name { get; set; }
             public string description { get; set; }
-            public string translate { get; set; }
+            public string translate1 { get; set; }
+            public string translate2 { get; set; }
             public int hashtag { get; set; }
             public bool isEdit { get; set; } = false;
         }
@@ -17,7 +18,7 @@ namespace api_help_desk.Controllers.Dictionary
         {
             public string name { get; set; }
             public string area { get; set; }
-            public Guid language_id { get; set; }
+            public Guid? language_id { get; set; }
         }
 
         public class DictionaryTraductorIn
@@ -57,15 +58,17 @@ namespace api_help_desk.Controllers.Dictionary
         public class DictionaryDataWordIn
         {
             public Guid componentObject_id { get; set; }
-            public Guid language_id { get; set; }
-            public string translate { get; set; }
+            public Guid? language_id { get; set; }
+            public string translate1 { get; set; }
+            public string translate2 { get; set; }
             public Guid task_id { get; set; }
         }
 
         public class DictionaryDataWordOut
         {
             public Guid componentObject_id { get; set; }
-            public string translate { get; set; }
+            public string translate1 { get; set; }
+            public string translate2 { get; set; }
         }
 
         public class DictionaryDataOut

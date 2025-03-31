@@ -64,7 +64,8 @@ SELECT
 	null AS [route],
 	@task_id
 FROM [frontend].component AS CC
-WHERE CC.id = @component_id
+	LEFT JOIN [security].menuData AS MD ON MD.component_id = CC.id
+WHERE CC.id = @component_id AND MD.id IS NULL
 
 /*eliminar registros que no existen en la lista*/
 /*registros de eventor*/

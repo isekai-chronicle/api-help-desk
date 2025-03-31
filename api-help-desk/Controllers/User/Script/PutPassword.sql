@@ -15,4 +15,7 @@ WHEN MATCHED THEN
         target.password = @HashedPassword,
         target.passwordLastChangedDate = CURRENT_TIMESTAMP,
         target.expireDate = DATEADD(DAY, 30, CURRENT_TIMESTAMP),
-        target.task_id = @task_id;
+        target.task_id = @task_id
+WHEN NOT MATCHED THEN
+    INSERT (user_id, password, passwordLastChangedDate, expireDate, task_id)
+    VALUES (@id, @HashedPassword, CURRENT_TIMESTAMP, DATEADD(DAY, 30, CURRENT_TIMESTAMP), @task_id);

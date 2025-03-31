@@ -10,6 +10,7 @@ SELECT
 	'ING' AS [language],
 	TS.*
 FROM help_desk_00.[security].[user] AS U
+	INNER JOIN help_desk_00.[security].userAccess AS US ON U.id =US.[user_id]
 	OUTER APPLY (
 		SELECT 
 			L.name AS list,
@@ -20,5 +21,5 @@ FROM help_desk_00.[security].[user] AS U
 			INNER JOIN help_desk_00.support.taskReview AS TW ON TW.task_id = T.id AND TW.startDate IS NOT NULL AND TW.endDate IS NULL
 		WHERE CAST(U.id AS NVARCHAR(100)) = PFT.[value] AND T.isActive = 1 AND T.isCompleted = 0
 	) AS TS
-WHERE U.account = @userName /*AND U.[password] = [security].authentication_fn_password(@password) */
+WHERE U.account = @userName AND US.[password] = HASHBYTES('SHA2_256', @password)
 	AND U.isActive = 1
