@@ -23,5 +23,12 @@
      <HintPath>..\Authentication\ThroneEncrypt.dll</HintPath>
    </Reference>
  </ItemGroup>
- 
+
+ <ItemGroup>
+    <None Update="Controllers\**\*.sql">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+
+   <None Remove="Controllers\_\**\*.sql" />
+  </ItemGroup>
 </Project>
