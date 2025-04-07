@@ -6,7 +6,7 @@ namespace api_help_desk.Controllers.Security.Authentication
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class AuthenticationController : ControllerBase
     {
         private readonly AuthenticationInterface IMethod;
@@ -24,9 +24,9 @@ namespace api_help_desk.Controllers.Security.Authentication
 
         [AllowAnonymous]
         [HttpPost("PostLogOut")]
-        public async Task<ActionResult> PostLogOut([FromBody] Guid user_id)
+        public async Task<ActionResult> PostLogOut([FromBody] UserId user)
         {
-            await IMethod.PostLogOut(user_id);
+            await IMethod.PostLogOut(user.user_id);
             return Ok();
         }
 
@@ -43,6 +43,14 @@ namespace api_help_desk.Controllers.Security.Authentication
                 //log error
                 return StatusCode(500, ex.Message);
             }
+        }
+
+
+        [HttpPost("PostMenu")]
+        public async Task<ActionResult> PostMenu([FromBody] UserAccess menu)
+        {
+            await IMethod.PostMenu(menu);
+            return Ok();
         }
     }
 }

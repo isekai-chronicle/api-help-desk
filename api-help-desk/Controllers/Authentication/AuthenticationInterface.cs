@@ -8,5 +8,6 @@
 
         public Task<string> GetJWT(User user, Guid id, string country);
         public Task<List<MenuModel>> GetMenu(Guid user);
+        public Task<List<MenuModel>> PostMenu(UserAccess menu);
     }
 }

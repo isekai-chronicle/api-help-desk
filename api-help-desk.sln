@@ -5,14 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api-help-desk", "api-help-desk\api-help-desk.csproj", "{A7893502-8FD6-4322-991B-C6F33A0685ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hi-api-engineering", "..\hi-api-engineering\hi-api-engineering\hi-api-engineering.csproj", "{2F5563A4-CF64-4741-B75F-C367D8A77D7B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hi-api-finance", "..\hi-api-finance\hi-api-finance\hi-api-finance.csproj", "{ADE08D2D-9B8A-48DF-963C-AE3FA03B1E15}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hi-api-planning", "..\hi-api-planning\hi-api-planning\hi-api-planning.csproj", "{E7F42187-5F8B-4E4A-A569-5719B3A6E6BC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hi-api-exchange", "..\hi-api-exchange\hi-api-exchange\hi-api-exchange.csproj", "{C0C8894C-2228-4C2D-B021-8387A2011603}"
-EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

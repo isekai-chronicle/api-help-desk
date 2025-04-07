@@ -169,5 +169,22 @@ namespace api_help_desk.Controllers.Security.Authentication
 
             }
         }
+
+        public Task<List<MenuModel>> PostMenu(UserAccess menu)
+        {
+            var sqlFilePath = Path.Combine(_path, "PostMenu.sql");
+            var sql = File.ReadAllText(sqlFilePath);
+            parameters = new DynamicParameters();
+            using (var connection = _context.CreateConnection("", "helpdesk"))
+            {
+                parameters.Add("@user_id_parameter", menu.user_id);
+                parameters.Add("@component_id_parameter", menu.component_id);
+                parameters.Add("@task_id_parameter", menu.task_id);
+
+                var list = connection.Query<MenuModel>(sql, parameters);
+                return System.Threading.Tasks.Task.FromResult(list.ToList());
+            }
+        }
+
     }
 }

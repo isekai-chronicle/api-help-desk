@@ -10,6 +10,11 @@
         public string password { get; set; }
     }
 
+    public class UserId
+    {
+        public Guid user_id { get; set; }
+    }
+
     public class Config
     {
         public Guid access { get; set; }
@@ -18,6 +23,14 @@
         public string country { get; set; }
         public List<TaskList> tasks { get; set; }
         public string? key { get; set; }
+    }
+
+    public class UserAccess
+    {
+        public Guid user_id { get; set; }
+        public Guid component_id { get; set; }
+        public Guid task_id { get; set; }
+
     }
 
     public class TaskList
