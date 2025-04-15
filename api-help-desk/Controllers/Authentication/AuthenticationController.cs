@@ -47,10 +47,11 @@ namespace api_help_desk.Controllers.Security.Authentication
 
 
         [HttpPost("PostMenu")]
-        public async Task<ActionResult> PostMenu([FromBody] UserAccess menu)
+        public async Task<ActionResult> PostMenu([FromBody] List<UserAccess> menu)
         {
             await IMethod.PostMenu(menu);
             return Ok();
         }
     }
+
 }

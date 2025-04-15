@@ -34,6 +34,8 @@ namespace api_help_desk.Controllers.Menu
             public Guid? component_id { get; set; }
             public string? menuData_name_component { get; set; }
             public List<ComponentDataObject> componentDataObjects { get; set; }
+
+            public bool isCheck { get; set; } = false;
         }
 
         public class ComponentDataObject

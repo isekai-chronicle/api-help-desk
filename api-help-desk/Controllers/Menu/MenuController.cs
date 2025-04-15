@@ -17,11 +17,11 @@ namespace api_help_desk.Controllers.Menu
         }
 
         [HttpGet("Get")]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(Guid user_id)
         {
             try
             {
-                var list = await IMethod.Get();
+                var list = await IMethod.Get(user_id);
                 return Ok(list);
             }
             catch (Exception ex)

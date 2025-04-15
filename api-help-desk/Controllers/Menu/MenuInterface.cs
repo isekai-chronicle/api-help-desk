@@ -6,7 +6,7 @@ namespace api_help_desk.Controllers.Menu
 {
     public interface MenuInterface
     {
-        Task<List<MenuListOut>> Get();
+        Task<List<MenuListOut>> Get(Guid user_id);
         Task<MenuListComponentOut> GetMenuComponent(Guid menuData_id);
         Task<List<MenuComboOut>> GetCombo();
         Task<List<MenuDataComboOut>> GetComboMenuData(Guid menu_id);

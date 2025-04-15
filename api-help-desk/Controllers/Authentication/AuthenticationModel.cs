@@ -57,5 +57,6 @@
         public virtual bool isDisabled { get; set; }
         public virtual bool isActive { get; set; }
         public virtual int sort { get; set; }
+        public virtual bool isCheck { get; set; }
     }
 }

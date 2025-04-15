@@ -19,13 +19,14 @@ namespace api_help_desk.Controllers.Menu
         private string _path = Path.Combine(Directory.GetCurrentDirectory(), "Controllers", "Menu", "Script");
         public MenuService(DapperContext context) => _context = context;
 
-        public async Task<List<MenuListOut>> Get()
+        public async Task<List<MenuListOut>> Get(Guid user_id)
         {
             var sqlFilePath = Path.Combine(_path, "Get.sql");
             var sql = await File.ReadAllTextAsync(sqlFilePath);
 
             var configs = new List<MenuListOut>();
-
+            parameters = new DynamicParameters();
+            parameters.Add("@user_id_parameter", user_id);
             using (var connection = _context.CreateConnection("", "helpdesk"))
             {
                 var result = await connection.QueryAsync<MenuListOut, MenuData, ComponentData, ComponentDataObject, MenuListOut>(
@@ -80,6 +81,7 @@ namespace api_help_desk.Controllers.Menu
                                {
                                    menuData_id_component = componentData.menuData_id_component,
                                    component_id = componentData.component_id,
+                                   isCheck = componentData.isCheck,
                                    menuData_name_component = componentData.menuData_name_component,
                                    componentDataObjects = new List<ComponentDataObject>()
                                };
@@ -99,6 +101,7 @@ namespace api_help_desk.Controllers.Menu
 
                    return menuEntry;
                },
+               parameters,
                splitOn: "menuData_id,menuData_id_component,componentObject_id",
                commandTimeout: 0
            );

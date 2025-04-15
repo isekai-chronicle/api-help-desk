@@ -7,6 +7,7 @@ using System.Data.Common;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 
 
 namespace api_help_desk.Controllers.Security.Authentication
@@ -170,18 +171,16 @@ namespace api_help_desk.Controllers.Security.Authentication
             }
         }
 
-        public Task<List<MenuModel>> PostMenu(UserAccess menu)
+        public Task<List<MenuModel>> PostMenu(List<UserAccess> menu)
         {
             var sqlFilePath = Path.Combine(_path, "PostMenu.sql");
             var sql = File.ReadAllText(sqlFilePath);
             parameters = new DynamicParameters();
+            var json = JsonSerializer.Serialize(menu);
+            parameters.Add("@json_parameter", json);
             using (var connection = _context.CreateConnection("", "helpdesk"))
             {
-                parameters.Add("@user_id_parameter", menu.user_id);
-                parameters.Add("@component_id_parameter", menu.component_id);
-                parameters.Add("@task_id_parameter", menu.task_id);
-
-                var list = connection.Query<MenuModel>(sql, parameters);
+                var list = connection.Query<MenuModel>(sql, parameters, commandTimeout: 0);
                 return System.Threading.Tasks.Task.FromResult(list.ToList());
             }
         }
