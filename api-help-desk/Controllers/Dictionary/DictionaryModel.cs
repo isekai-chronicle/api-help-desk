@@ -26,6 +26,7 @@ namespace api_help_desk.Controllers.Dictionary
             public string name { get; set; }
             public string area { get; set; }
             public string language { get; set; }
+            public Guid? task_id { get; set; }
         }
 
         public class DictionaryDataIn

@@ -51,6 +51,7 @@ namespace api_help_desk.Controllers.Dictionary
                 parameters.Add("@name_parameter", data.name);
                 parameters.Add("@area_parameter", data.area);
                 parameters.Add("@language_parameter", data.language);
+                parameters.Add("@task_id_parameter", data.task_id);
 
                 var result = new Dictionary<string, DictionaryTraductorDetails>();
 
