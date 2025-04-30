@@ -23,6 +23,7 @@ SELECT
 	CAST(0 AS BIT) AS [disabled],
 	ISNULL(CAST(
 		CASE 
+			WHEN @name != 'style-list' THEN 1
 			WHEN COO.id = '1E30F32C-5181-4789-82E2-5AEF05364771' 
 				AND @user IN ('p_ovalles4223','d_suarez1050', 'r_aburto9293', 'j_ruiz3854', 'v_aleman9081') 
 			THEN 1 
