@@ -173,16 +173,25 @@ namespace api_help_desk.Controllers.Security.Authentication
 
         public Task<List<MenuModel>> PostMenu(List<UserAccess> menu)
         {
-            var sqlFilePath = Path.Combine(_path, "PostMenu.sql");
-            var sql = File.ReadAllText(sqlFilePath);
-            parameters = new DynamicParameters();
-            var json = JsonSerializer.Serialize(menu);
-            parameters.Add("@json_parameter", json);
-            using (var connection = _context.CreateConnection("", "helpdesk"))
+            try
             {
-                var list = connection.Query<MenuModel>(sql, parameters, commandTimeout: 0);
-                return System.Threading.Tasks.Task.FromResult(list.ToList());
+                var sqlFilePath = Path.Combine(_path, "PostMenu.sql");
+                var sql = File.ReadAllText(sqlFilePath);
+                parameters = new DynamicParameters();
+                var json = JsonSerializer.Serialize(menu);
+
+                parameters.Add("@json_parameter", json);
+                using (var connection = _context.CreateConnection("", "helpdesk"))
+                {
+                    var list = connection.Query<MenuModel>(sql, parameters, commandTimeout: 0);
+                    return System.Threading.Tasks.Task.FromResult(list.ToList());
+                }
             }
+            catch (Exception e)
+            {
+                return null;
+            }
+
         }
 
     }

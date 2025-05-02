@@ -29,6 +29,7 @@
     {
         public Guid user_id { get; set; }
         public Guid component_id { get; set; }
+        public List<Guid>? componentObjects_id { get; set; }
         public Guid task_id { get; set; }
 
     }

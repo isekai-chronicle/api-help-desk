@@ -83,18 +83,25 @@ namespace api_help_desk.Controllers.Menu
                                    component_id = componentData.component_id,
                                    isCheck = componentData.isCheck,
                                    menuData_name_component = componentData.menuData_name_component,
-                                   componentDataObjects = new List<ComponentDataObject>()
+                                   componentDataObjects = new List<ComponentDataObject>(),
+                                   componentObjects_id = new List<Guid>()
                                };
                                menuDataEntry.componentDatas.Add(componentEntry);
                            }
 
                            if (componentObject != null && componentObject.componentObject_id.HasValue)
                            {
+                               if (componentObject.componentObject_id_user.HasValue)
+                               {
+                                   componentEntry.componentObjects_id.Add(new Guid(componentObject.componentObject_id_user.ToString()));
+                               }
+
                                componentEntry.componentDataObjects.Add(new ComponentDataObject
                                {
                                    componentObject_id = componentObject.componentObject_id,
                                    componentObject_name = componentObject.componentObject_name
                                });
+
                            }
                        }
                    }

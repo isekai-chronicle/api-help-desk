@@ -6,15 +6,13 @@ namespace api_help_desk.Controllers.Menu
         {
             public Guid menu_id { get; set; }
             public string menu_name { get; set; }
-
-            public List<MenuData> menudatas { get; set; }
-
             public int hashtag { get; set; }
             public bool isCancel { get; set; } = false;
             public bool isView { get; set; } = false;
             public bool isEdit { get; set; } = true;
             public bool isDelete { get; set; } = true;
             public bool isConfirmDelete { get; set; } = false;
+            public List<MenuData> menudatas { get; set; }
         }
 
         public class MenuData
@@ -33,15 +31,16 @@ namespace api_help_desk.Controllers.Menu
             public Guid? menuData_id_component { get; set; }
             public Guid? component_id { get; set; }
             public string? menuData_name_component { get; set; }
-            public List<ComponentDataObject> componentDataObjects { get; set; }
-
             public bool isCheck { get; set; } = false;
+            public List<ComponentDataObject> componentDataObjects { get; set; }
+            public List<Guid>? componentObjects_id { get; set; }
         }
 
         public class ComponentDataObject
         {
             public Guid? componentObject_id { get; set; }
             public string? componentObject_name { get; set; }
+            public Guid? componentObject_id_user { get; set; }
         }
 
         public class MenuListComponentOut
@@ -91,8 +90,8 @@ namespace api_help_desk.Controllers.Menu
         public class component
         {
             public Guid? menuData_id_component { get; set; }
-
         }
+
 
         public class MenuDataDataIn
         {
