@@ -51,4 +51,4 @@ Distinct
 	UA.task_id
 FROM @UserAccess AS UA
 	LEFT JOIN [security].user_componentObject AS UO ON UO.componentObject_id = UA.componentObject_id AND UO.[user_id] = UA.[user_id]
-WHERE UO.[user_id] Is NULL
+WHERE UO.[user_id] Is NULL AND UA.componentObject_id IS NOT NULL
