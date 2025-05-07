@@ -18,13 +18,13 @@ DECLARE @language_id UNIQUEIDENTIFIER = (SELECT id FROM [setting].[language] AS 
 		CAST(CASE WHEN UC.component_id IS NULL THEN 0 ELSE 1 END AS BIT) AS isCheck	
 	FROM [security].menu AS MM 
 	INNER JOIN [security].menuData AS MD ON MD.menu_id = MM.id
-	LEFT JOIN [frontend].component AS CC ON CC.id = MD.component_id
+	LEFT JOIN [frontend].component AS CC ON CC.id = MD.component_id AND CC.isOffline = 0
 	LEFT JOIN [security].area AS A ON CC.area_id = A.id	
 	LEFT JOIN [frontend].componentObject AS CO ON CO.name = 'title' AND CO.component_id = CC.id
 	LEFT JOIN frontend.componentObject_language AS COL ON CO.id = COL.componentObject_id AND COL.language_id = @language_id
 	LEFT JOIN [security].user_component AS UC ON UC.[user_id] = @user_id AND UC.component_id = CC.id
 	WHERE MM.id = @menu_id 
-	AND ((MD.component_id IS NOT NULL AND MD.menuData_id_root IS NOT NULL) OR (MD.component_id Is NULL))
+	AND ((MD.component_id IS NOT NULL AND MD.menuData_id_root IS NOT NULL) OR (MD.component_id Is NULL)) 
 ),
 -- CTE recursiva que propaga el isCheck
 RecursiveIsCheck AS (
@@ -95,7 +95,7 @@ FROM (
 		INNER JOIN [security].user_component AS UC ON UC.[user_id] = @user_id AND UC.component_id = C.id
 		LEFT JOIN [frontend].componentObject AS CO ON CO.name = 'title' AND CO.component_id = C.id
 		LEFT JOIN frontend.componentObject_language AS COL ON CO.id = COL.componentObject_id AND COL.language_id = @language_id
-	WHERE MD.menuData_id_root Is NULL
+	WHERE MD.menuData_id_root Is NULL AND C.isOffline = 0
 	UNION ALL
 	SELECT 
 		MD.id,

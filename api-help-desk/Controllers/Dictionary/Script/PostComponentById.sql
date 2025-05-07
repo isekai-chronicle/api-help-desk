@@ -8,9 +8,9 @@ DECLARE @area_id UNIQUEIDENTIFIER = (SELECT A.id FROM [security].area AS A WHERE
 DECLARE @component_id UNIQUEIDENTIFIER = (SELECT TOP 1 COM.id FROM frontend.component AS COM WHERE COM.name = @name AND COM.area_id = @area_id)
 DECLARE @language_id UNIQUEIDENTIFIER = (SELECT TOP 1 COM.id FROM setting.language AS COM WHERE UPPER(COM.code) = UPPER(@language))
 
-DECLARE @user NVARCHAR(50) = (
+DECLARE @user_id UNIQUEIDENTIFIER = (
 SELECT 
-	U.account
+	U.id
 FROM support.task AS T
 	INNER JOIN support.project_field_task AS PFT ON T.id = PFT.task_id
 	INNER JOIN [security].[user] AS U ON U.id = PFT.value
@@ -20,20 +20,13 @@ SELECT
 	COO.id AS componentObject_id,
 	COO.name AS [key], 	
 	COL.value AS word,
-	CAST(0 AS BIT) AS [disabled],
-	ISNULL(CAST(
-		CASE 
-			WHEN @name != 'style-list' THEN 1
-			WHEN COO.id = '1E30F32C-5181-4789-82E2-5AEF05364771' 
-				AND @user IN ('p_ovalles4223','d_suarez1050', 'r_aburto9293', 'j_ruiz3854', 'v_aleman9081') 
-			THEN 1 
-			WHEN @user IS NULL THEN 0
-			WHEN COO.id != '1E30F32C-5181-4789-82E2-5AEF05364771' THEN 1 END AS BIT), 0) AS [visible]
+	ISNULL(~UCO.isEnable, 1) AS [disabled],
+	CAST(1 AS BIT) AS [visible]
 FROM frontend.componentObject AS COO 
+	INNER JOIN frontend.component AS CC ON CC.id = COO.component_id 
 	LEFT JOIN frontend.componentObject_language AS COL ON COL.componentObject_id = COO.id 
-WHERE COO.component_id = @component_id AND COL.language_id = @language_id
-
-
+	LEFT JOIN [security].user_componentObject AS UCO ON COO.id = UCO.componentObject_id AND UCO.[user_id] = @user_id
+WHERE COO.component_id = @component_id AND COL.language_id = @language_id 
 
 
 

@@ -9,7 +9,7 @@ namespace api_help_desk.Controllers.Component
             public string displayName { get; set; }
             public Guid area_id { get; set; }
             public string area_name { get; set; }
-            public Guid path_id { get; set; }
+            public Guid? path_id { get; set; }
             public string path_name { get; set; }
             public bool isOffline { get; set; }
             public bool isService { get; set; }
@@ -34,7 +34,7 @@ namespace api_help_desk.Controllers.Component
             public string name { get; set; }
             public string displayName { get; set; }
             public Guid area_id { get; set; }
-            public Guid path_id { get; set; }
+            public Guid? path_id { get; set; }
             public bool isOffline { get; set; }
             public bool isService { get; set; }
             public bool isShared { get; set; }
@@ -55,7 +55,7 @@ namespace api_help_desk.Controllers.Component
             public string displayName { get; set; }
             public Guid area_id { get; set; }
             public string area_name { get; set; }
-            public Guid path_id { get; set; }
+            public Guid? path_id { get; set; }
             public string path_name { get; set; }
             public bool isOffline { get; set; }
             public bool isService { get; set; }
