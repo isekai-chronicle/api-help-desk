@@ -46,7 +46,7 @@ SELECT
 	A.id AS area_id,
 	A.name AS area_name,
 	P.id AS path_id,
-	P.name AS path_name	
+	P.name AS path_name		
 FROM @outputTable CT	
 	INNER JOIN [security].area AS A ON A.id = CT.area_id
 	LEFT JOIN [global].[path] AS P ON P.id = CT.path_id

@@ -101,7 +101,7 @@ BEGIN
                 WHERE T.id = @review_id
             END
         END
-
+        /*
         If @logOut = 1 AND @logIn = 0
         BEGIN
             IF @review_id Is NOT NULL AND (@review_start IS NULL AND @review_end IS NULL)
@@ -122,5 +122,6 @@ BEGIN
                 WHERE T.id = @review_id
             END
         END
+        */
     END
 END
