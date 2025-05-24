@@ -1,6 +1,6 @@
 @api_help_desk_HostAddress = http://localhost:5002
 
-GET {{api_help_desk_HostAddress}}/weatherforecast/
+GET {{api_help_desk_HostAddress}}/swagger/
 Accept: application/json
 
 ###

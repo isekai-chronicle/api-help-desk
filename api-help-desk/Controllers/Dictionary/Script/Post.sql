@@ -11,7 +11,7 @@ DECLARE @component_id UNIQUEIDENTIFIER = NULL;
 DECLARE @tag_id UNIQUEIDENTIFIER = '090C18A7-C768-49AA-8762-610138AC2341' /*TEMPORALMENTE CAMBIAR POR REAL*/
  
  /*convertir la variable @word a tabla json*/
-DECLARE @objects AS TABLE(fieldName NVARCHAR(50), fieldValue NVARCHAR(50))
+DECLARE @objects AS TABLE(fieldName NVARCHAR(100), fieldValue NVARCHAR(100))
 /*
 INSERT INTO @objects
 SELECT 
