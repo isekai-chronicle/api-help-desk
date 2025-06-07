@@ -37,6 +37,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.WebHost.UseUrls("http://0.0.0.0:5002");
+builder.Services.AddCors();
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+
 
 var app = builder.Build();
 
@@ -44,7 +49,9 @@ app.UseCors(builder =>
 {
     builder.AllowAnyOrigin()
            .AllowAnyMethod()
-           .AllowAnyHeader();
+           .AllowAnyHeader()
+           .WithExposedHeaders("Content-Disposition"); // Si necesitas exponer headers específicos
+           ;
 });
 
 // Configure the HTTP request pipeline.
@@ -55,6 +62,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication(); // Agregar esta línea
 
 app.UseAuthorization();
 
