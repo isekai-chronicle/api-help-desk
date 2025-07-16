@@ -2,5 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../HadesSecureConnect" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../HermesTasks" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../OdinNetSuite" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../hi-api-hickory" vcs="Git" />
   </component>
 </project>
