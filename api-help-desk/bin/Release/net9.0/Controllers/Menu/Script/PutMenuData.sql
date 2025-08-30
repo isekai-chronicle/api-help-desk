@@ -23,7 +23,8 @@ WHEN MATCHED THEN
         target.displayName = @displayName,          
         target.task_id = @task_id,
         target.menu_id = @menu_id,
-        target.menuData_id_root = @menuData_id_root
+        target.menuData_id_root = @menuData_id_root,
+        target.task_id = @task_id
     OUTPUT inserted.id, inserted.name, inserted.displayName, inserted.menu_id, inserted.menuData_id_root INTO @outputTable;
 
 /*Devolver el registro actualizado o insertado*/

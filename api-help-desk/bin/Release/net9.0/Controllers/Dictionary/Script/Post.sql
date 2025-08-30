@@ -72,19 +72,22 @@ WHERE CC.id = @component_id AND MD.id IS NULL
 DELETE COE
 FROM frontend.componentObject AS COO 
 	INNER JOIN frontend.componentObject_event AS COE ON COE.componentObject_id = COO.id
+    LEFT JOIN security.user_componentObject AS UC ON UC.componentObject_id = COO.id
 	LEFT JOIN @objects AS OBJ ON COO.name = OBJ.fieldName 
-WHERE COO.component_id = @component_id AND OBJ.fieldName IS NULL
+WHERE COO.component_id = @component_id AND OBJ.fieldName IS NULL AND UC.componentObject_id IS NULL
 /*registros de idiomas*/
 DELETE COE
 FROM frontend.componentObject AS COO 
 	INNER JOIN frontend.componentObject_language AS COE ON COE.componentObject_id = COO.id
+    LEFT JOIN security.user_componentObject AS UC ON UC.componentObject_id = COO.id
 	LEFT JOIN @objects AS OBJ ON COO.name = OBJ.fieldName 
-WHERE COO.component_id = @component_id AND OBJ.fieldName IS NULL
+WHERE COO.component_id = @component_id AND OBJ.fieldName IS NULL AND UC.componentObject_id IS NULL
 /*registro de objeto*/
 DELETE COO
 FROM frontend.componentObject AS COO 	
+    LEFT JOIN security.user_componentObject AS UC ON UC.componentObject_id = COO.id
 	LEFT JOIN @objects AS OBJ ON COO.name = OBJ.fieldName 
-WHERE COO.component_id = @component_id AND OBJ.fieldName IS NULL
+WHERE COO.component_id = @component_id AND OBJ.fieldName IS NULL AND UC.componentObject_id IS NULL
 
 /*crear primero los objetos en base a la lista*/
 INSERT INTO frontend.componentObject (component_id, tag_id, name, description, task_id)
