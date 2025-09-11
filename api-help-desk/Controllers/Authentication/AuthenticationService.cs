@@ -20,7 +20,7 @@ namespace api_help_desk.Controllers.Security.Authentication
 
         public AuthenticationService(DapperContext Context) => _context = Context;
 
-        public async void GenerateTaskUserName(User user)
+        public async System.Threading.Tasks.Task GenerateTaskUserName(User user)
         {
             using (var connection = _context.CreateConnection("", "helpdesk"))
             {
@@ -38,7 +38,7 @@ namespace api_help_desk.Controllers.Security.Authentication
                     var isAuth = await connection.ExecuteAsync(
                         sql,
                         parameters,
-                    commandTimeout: 0);
+                        commandTimeout: 0);
 
                 }
                 catch (Exception ex)
@@ -83,7 +83,7 @@ namespace api_help_desk.Controllers.Security.Authentication
         }
         public async Task<List<Config>> PostToken(User user)
         {
-            GenerateTaskUserName(user);
+            await GenerateTaskUserName(user);
 
             using (var connection = _context.CreateConnection("", "helpdesk"))
             {

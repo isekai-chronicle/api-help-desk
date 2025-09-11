@@ -31,8 +31,8 @@ BEGIN
         UPDATE TSS SET TSS.isCompleted = 1
             OUTPUT inserted.id INTO @output_task_disabled
             FROM help_desk_00.support.task AS TSS
-                         INNER JOIN help_desk_00.support.project_field_task AS PFT ON TSS.id = PFT.task_id AND PFT.field_id = 'A8A8B25F-671A-4FEE-89A3-432EBFFA2AB9' AND CAST(@user_id AS NVARCHAR(100)) = PFT.[value]
-            INNER JOIN help_desk_00.support.project_field_task AS PFT_Date ON TSS.id = PFT_Date.task_id AND PFT_Date.field_id = '1B8BAE6D-6660-495D-A11B-A133DF63581B' AND CAST(PFT_Date.[value] AS DATE) != CAST(CURRENT_TIMESTAMP AS DATE)
+                INNER JOIN help_desk_00.support.project_field_task AS PFT ON TSS.id = PFT.task_id AND PFT.field_id = 'A8A8B25F-671A-4FEE-89A3-432EBFFA2AB9' AND CAST(@user_id AS NVARCHAR(100)) = PFT.[value]
+                INNER JOIN help_desk_00.support.project_field_task AS PFT_Date ON TSS.id = PFT_Date.task_id AND PFT_Date.field_id = '1B8BAE6D-6660-495D-A11B-A133DF63581B' AND CAST(PFT_Date.[value] AS DATE) != CAST(CURRENT_TIMESTAMP AS DATE)
         WHERE TSS.list_id = @list_id  AND TSS.isCompleted = 0
         
 --         SELECT
