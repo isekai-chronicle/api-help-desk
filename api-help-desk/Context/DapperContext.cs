@@ -8,22 +8,32 @@ namespace api_help_desk.Context
     {
         private readonly IConfiguration _configuration;
 
-        private readonly ThroneConnection.Services.ConnectionService dbConnection;
+        private class DatabaseConfig
+        {
+            public string Server { get; set; }
+            public string Database { get; set; }
+            public string UserId { get; set; }
+            public string Password { get; set; }
+        }
 
-        private ThroneConnection.Services.User? user;
+        private readonly DatabaseConfig _dbConfig;
 
         public DapperContext(IConfiguration configuration)
         {
             _configuration = configuration;
-            dbConnection = new ThroneConnection.Services.ConnectionService();
+            _dbConfig = new DatabaseConfig
+            {
+                Server = _configuration["Database:Server"],
+                Database = _configuration["Database:Database"],
+                UserId = _configuration["Database:UserId"],
+                Password = _configuration["Database:Password"]
+            };
         }
-
-        public IDbConnection CreateConnection() => dbConnection.GetSqlConnection();
-
+        
         public IDbConnection CreateConnection(string user, string context)
         {
-
-            return dbConnection.GetSqlConnection(this.user, context);
+            return new SqlConnection(
+                $"Server={_dbConfig.Server};Initial Catalog={_dbConfig.Database};User Id={_dbConfig.UserId};Password={_dbConfig.Password};Persist Security Info = False; MultipleActiveResultSets = False; Encrypt = false; TrustServerCertificate = False; Connection Timeout = 30;");
         }
 
         public string GetValue(string value)

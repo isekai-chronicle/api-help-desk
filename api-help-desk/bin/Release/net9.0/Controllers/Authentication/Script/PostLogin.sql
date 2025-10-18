@@ -2,7 +2,7 @@ DECLARE
 @userName NVARCHAR(50) = @userName_parameter,
 @password NVARCHAR(50) = @password_parameter
 
-
+ 
 SELECT 
 	CAST(CASE WHEN COUNT(1) OVER() > 0 THEN 1 ELSE 0 END AS BIT) AS isValidate,
     U.id AS access,
