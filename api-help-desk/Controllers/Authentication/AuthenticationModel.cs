@@ -4,6 +4,18 @@
     {
     }
 
+    public class LoginContext
+    {
+        public string? Ip { get; set; }
+        public string? ForwardedFor { get; set; }
+        public string? UserAgent { get; set; }
+        public string? AcceptLanguage { get; set; }
+        public string? Referer { get; set; }
+        public string? Host { get; set; }
+        public bool IsHttps { get; set; }
+        public int? Port { get; set; }
+    }
+
     public class User
     {
         public string userName { get; set; }

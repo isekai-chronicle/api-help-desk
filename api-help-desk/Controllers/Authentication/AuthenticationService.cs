@@ -81,7 +81,7 @@ namespace api_help_desk.Controllers.Security.Authentication
             GenerateTaskUserId(user_id);
             return null;
         }
-        public async Task<List<Config>> PostToken(User user)
+        public async Task<List<Config>> PostToken(User user, LoginContext context)
         {
             await GenerateTaskUserName(user);
 
@@ -117,7 +117,7 @@ namespace api_help_desk.Controllers.Security.Authentication
 
                     if (configs[0].isValidate)
                     {
-                        string token = await GetJWT(user, configs[0].access, configs[0].country);
+                        string token = await GetJWT(user, configs[0].access, configs[0].country, context);
                         foreach (var config in configs)
                         {
                             config.key = token;
@@ -135,12 +135,29 @@ namespace api_help_desk.Controllers.Security.Authentication
             return null;
         }
 
-        public async Task<string> GetJWT(User user, Guid id, string country)
+        public async Task<string> GetJWT(User user, Guid id, string country, LoginContext context)
         {
-            var claims = new ClaimsIdentity(new[]
+            var claimsList = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.userName),
-            });
+                new Claim(JwtRegisteredClaimNames.Sub, user.userName ?? string.Empty),
+                new Claim("uid", id.ToString()),
+                new Claim("ctry", country ?? string.Empty)
+            };
+
+            if (context != null)
+            {
+                if (!string.IsNullOrWhiteSpace(context.Ip)) claimsList.Add(new Claim("ip", context.Ip));
+                if (!string.IsNullOrWhiteSpace(context.ForwardedFor)) claimsList.Add(new Claim("xff", context.ForwardedFor));
+                if (!string.IsNullOrWhiteSpace(context.UserAgent)) claimsList.Add(new Claim("ua", context.UserAgent));
+                if (!string.IsNullOrWhiteSpace(context.AcceptLanguage)) claimsList.Add(new Claim("lang", context.AcceptLanguage));
+                if (!string.IsNullOrWhiteSpace(context.Referer)) claimsList.Add(new Claim("ref", context.Referer));
+                if (!string.IsNullOrWhiteSpace(context.Host)) claimsList.Add(new Claim("host", context.Host));
+                claimsList.Add(new Claim("https", context.IsHttps ? "1" : "0"));
+                if (context.Port.HasValue) claimsList.Add(new Claim("port", context.Port.Value.ToString()));
+            }
+
+            var claims = new ClaimsIdentity(claimsList);
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenkey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_context.GetValue("Jwt:Key")));
             var tokenDescriptor = new SecurityTokenDescriptor
